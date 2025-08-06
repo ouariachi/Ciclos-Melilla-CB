@@ -1,0 +1,56 @@
+---
+import { Bike, Wrench, Hammer, HelpCircle } from '@lucide/astro';
+---
+
+<section class="mb-30" id="services">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">NUESTROS SERVICIOS</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3 md:gap-5">
+      <div class="flex flex-col items-center text-center p-6 border border-white/20 rounded-lg hover:shadow-lg hover:shadow-white/10 transition">
+        <Bike class="w-8 h-8 md:w-10 md:h-10 text-primary mb-4" />
+        <h3 class="text-lg font-semibold mb-2">Venta de bicicletas</h3>
+        <p class="text-sm text-gray-300">Modelos urbanos, de montaña y ruta. Para todos los niveles.</p>
+      </div>
+
+      <div class="flex flex-col items-center text-center p-6 border border-white/20 rounded-lg hover:shadow-lg hover:shadow-white/10 transition">
+        <Wrench class="w-8 h-8 md:w-10 md:h-10 text-primary mb-4" />
+        <h3 class="text-lg font-semibold mb-2">Taller</h3>
+        <p class="text-sm text-gray-300">Reparaciones, ajustes, mantenimiento preventivo y correctivo.</p>
+      </div>
+
+      <div class="flex flex-col items-center text-center p-6 border border-white/20 rounded-lg hover:shadow-lg hover:shadow-white/10 transition">
+        <Hammer class="w-8 h-8 md:w-10 md:h-10 text-primary mb-4" />
+        <h3 class="text-lg font-semibold mb-2">Personalización</h3>
+        <p class="text-sm text-gray-300">Armado a medida según tus necesidades y estilo de pedaleo.</p>
+      </div>
+
+      <div class="flex flex-col items-center text-center p-6 border border-white/20 rounded-lg hover:shadow-lg hover:shadow-white/10 transition">
+        <HelpCircle class="w-8 h-8 md:w-10 md:h-10 text-primary mb-4" />
+        <h3 class="text-lg font-semibold mb-2">Asesoría especializada</h3>
+        <p class="text-sm text-gray-300">Te ayudamos a elegir la bicicleta y equipamiento ideal para ti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const section = document.querySelector("#services");
+    gsap.from(section, {
+      scrollTrigger: {
+        trigger: section,
+        start: "top 75%",
+        toggleActions: "play reverse play reverse",
+      },
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      ease: "power2.inOut",
+    });
+  });
+</script>

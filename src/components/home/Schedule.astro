@@ -1,0 +1,27 @@
+---
+import ScheduleReact from "./ScheduleReact.tsx";
+---
+
+<ScheduleReact client:load />
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const section = document.querySelector("#schedule");
+    gsap.from(section, {
+      scrollTrigger: {
+        trigger: section,
+        start: "top 85%",
+        toggleActions: "play reverse play reverse",
+      },
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      ease: "power2.inOut",
+    });
+  });
+</script>

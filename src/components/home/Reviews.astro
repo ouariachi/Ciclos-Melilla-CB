@@ -1,0 +1,115 @@
+---
+import { Star } from "@lucide/astro";
+import { timeSince } from "../../utils/timeSince";
+
+interface Review {
+  author: string;
+  rating: number;
+  text: string;
+  time: string;
+}
+
+const reviews: Review[] = [
+  {
+    author: "adrii ii",
+    rating: 5,
+    text: "Primeras marcas, un trato genial, se nota que tienen un buen conocimiento sobre las bicicletas, la recomiendo al 100% son profesionales.",
+    time: "2023-06-01",
+  },
+  {
+    author: "Carlos Herrero",
+    rating: 5,
+    text: "Buen servicio, muy buen material y un trato amigable, muy recomendable. La mejor tienda de bicis de Melilla sin lugar a dudas.",
+    time: "2018-06-01",
+  },
+  {
+    author: "francisco muñoz sanchez",
+    rating: 5,
+    text: "Espectacular como nos tratan y es increíble la calidad 100/10",
+    time: "2024-06-01",
+  },
+  { 
+    author: "F.J.R",
+    rating: 5,
+    text: "Una buena tienda de bicis.. artículos variados. Buena calidad.. y sobre todo un buen trato.. muy recomendable",
+    time: "2021-06-01",
+  }, 
+  {
+    author: "Psiquiatra de Canosa",
+    rating: 5,
+    text: "Viven la bici, ponen mucha pasión en todo lo que hacen, son bellisimas personas y profesionales.",
+    time: "2020-06-01",
+  },
+  {
+    author: "Riduan Castro",
+    rating: 5,
+    text: "Me encanta, cuidan las bicicletas como si fuesen tesoros, desde la más cara hasta la más humilde, para ellos cada tornillo cuenta. Sin duda mi tienda preferida.", 
+    time: "2025-07-31",
+  }
+];
+---
+
+<section 
+  id="reviews"
+  class="relative overflow-hidden my-5 z-5"
+>
+  <h1 class="text-3xl font-bold text-center mb-3">OPINIONES</h1>
+  <p class="text-center text-xl">Algunas de las opiniones de nuestros clientes</p>
+
+  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-[95vw] w-[1200px] mx-auto mt-4">
+    {reviews.map((review) => (
+      <div class="review-card bg-[#1d1d1d] p-6 rounded-lg shadow-md border border-gray-900">
+        <div class="flex items-center mb-2">
+          <div class="font-semibold text-lg">{review.author}</div>
+          <div class="ml-auto flex">
+            {Array.from({ length: 5 }, (_, i) => (
+              <Star
+                class={`w-4 h-4 ${i < review.rating ? 'text-yellow-500' : 'text-gray-300'}`}
+                fill={i < review.rating ? 'currentColor' : 'none'}
+              />
+            ))}
+          </div>
+        </div>
+        <p class="italic mb-2">"{review.text}"</p>
+        <p class="text-sm text-gray-400">{timeSince(review.time)}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".review-card");
+    cards.forEach((card) => {
+      animate(card);
+    });
+
+    const h1 = document.querySelector("#reviews h1");
+    animate(h1, 85);
+    const p = document.querySelector("#reviews p");
+    animate(p, 85);
+  });
+
+  function animate(el: Element | null, start?: number) {
+    if (!el) return;
+    gsap.fromTo(el, 
+      { opacity: 0, y: 40 },
+      {
+        scrollTrigger: {
+          trigger: el,
+          start: `top ${start || 65}%`,
+          toggleActions: "play reverse play reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.inOut",
+      }
+    );
+  }
+</script>

@@ -1,0 +1,124 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: rgb(0, 0, 0);
+  --color-foreground: rgb(255, 255, 255);
+  --color-primary: #F20505;
+  --color-secondary: #BF3F57;
+
+  --font-clash-display: 'Clash Display', sans-serif;
+
+  --animate-zoom-fade-in: zoomFadeIn 1s ease-in-out;
+  --animate-fade-in-translate-up: fadeInTranslateUp 1s ease-in-out forwards;
+  --animate-fade-in-translate-up-2: fadeInTranslateUp 1s ease-in-out 1s forwards;
+  --animate-fade-in-translate-up-3: fadeInTranslateUp 1s ease-in-out 2s forwards;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+html, body  {
+  margin: 0;
+  padding: 0;
+}
+
+.shade {
+  position: relative;
+  margin: -21px 0 0;
+  padding: 0;
+  display: block;
+  background: #111;
+  width: 100%;
+  height: 24px;
+  opacity: 0.25;
+  text-align: center;
+}
+
+@keyframes zoomFadeIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes fadeInTranslateUp {
+  from {
+    transform: translateY(40%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Marquee */
+#images-wrapper {
+  --images-length: 4;
+  --duration: 10s;
+}
+
+#images-wrapper div:nth-child(1) {
+  animation: marquee-1 var(--duration) linear infinite;
+}
+
+#images-wrapper div:nth-child(2) {
+  animation: marquee-2 var(--duration) linear infinite;
+}
+
+#images-wrapper div:nth-child(3) {
+  animation: marquee-3 var(--duration) linear infinite;
+}
+
+@keyframes marquee-1 {
+  0% { left: 0; }
+  100% { left: calc(var(--images-length) * -256px); }
+}
+
+@keyframes marquee-2 {
+  0% { left: 1024px; }
+  100% { left: 0; }
+}
+
+@keyframes marquee-3 {
+  0% { left: 2048px; }
+  100% { left: 1024px; }
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
