@@ -18,9 +18,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     function updateRoot(time: number) {
       lenisRef.current?.lenis?.raf(time * 1000)
     }
-
     gsap.ticker.add(updateRoot);
-
     return () => gsap.ticker.remove(updateRoot);
   }, [])
 

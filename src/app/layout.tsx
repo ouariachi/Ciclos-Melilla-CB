@@ -49,6 +49,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link href="https://api.fontshare.com/v2/css?f[]=clash-display@1&display=swap" rel="stylesheet"></link>
+      </head>
       <body className="relative h-min bg-background text-foreground font-clash-display w-screen overflow-x-hidden min-h-[100dvh]">
         <CookiesBanner />
         <SmoothScroll>

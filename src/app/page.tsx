@@ -1,15 +1,15 @@
-// app/page.tsx
-import "@/global.css";
+"use server";
+
+import BackgroundBlobs from "@/components/BackgroundBlobs";
 import Hero from "@/components/home/Hero";
-import Contact from "@/components/home/Contact";
-import Reviews from "@/components/home/Reviews";
-import FAQ from "@/components/home/FAQ";
-import Schedule from "@/components/home/Schedule";
 import WhoWeAre from "@/components/home/WhoWeAre";
 import Services from "@/components/home/Services";
-import BackgroundBlobs from "@/components/BackgroundBlobs";
+import Schedule from "@/components/home/Schedule";
+import Reviews from "@/components/home/Reviews";
+import FAQ from "@/components/home/FAQ";
+import Contact from "@/components/home/Contact";
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <main>
       <BackgroundBlobs />

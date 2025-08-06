@@ -1,4 +1,4 @@
-"use client"; // necesario si usas App Router
+"use client";
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 const images = [
   {
     src: "https://res.cloudinary.com/doaywtxph/image/upload/v1753732735/CIclosMelillaCB/specialized_epic_2021_s-works_owmnnu.webp",
-    opacity: "60%",
+    opacity: "50%",
     scale: "scale-[160%] sm:scale-100",
   },
   {
@@ -38,7 +38,7 @@ const HeroCarousel = () => {
   }, []);
 
   return (
-    <div className="absolute h-full w-full pointer-events-none overflow-hidden">
+    <div className="absolute h-full w-full pointer-events-none overflow-hidden -z-50">
       <div className="relative w-full h-full" id="carousel">
         {images.map((img, i) => (
           <Image
@@ -55,7 +55,8 @@ const HeroCarousel = () => {
               transition-all duration-1000
               mask-radial-from-40% mask-radial-from-black 
               mask-radial-to-100% mask-radial-to-transparent mask-circle
-              ${i === index ? "opacity-[60%] animate-zoom-fade-in" : "opacity-0"}
+              opacity-[${img.opacity}]
+              ${i === index ? "" : "opacity-0"}
             `}
             style={{ opacity: i === index ? img.opacity : "0" }}
             draggable={false}

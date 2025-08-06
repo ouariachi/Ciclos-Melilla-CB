@@ -122,3 +122,16 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* Background blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.35;
+}
+
+@media (max-width: 768px) {
+  .blob-mobile {
+    opacity: 0.2;
+  }
+}

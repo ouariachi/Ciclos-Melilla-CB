@@ -1,7 +1,7 @@
 const BackgroundBlobs = () => {
   return (
     <>
-      <div className="-z-50 absolute top-0 left-0 min-h-[5100px] w-[100dvw]">
+      <div className="-z-40 absolute top-0 left-0 min-h-[5100px] w-[100dvw]">
         <div
           className="blob blob-mobile z-30"
           style={{
@@ -141,20 +141,6 @@ const BackgroundBlobs = () => {
           }}
         />
       </div>
-
-      <style jsx>{`
-        .blob {
-          position: absolute;
-          border-radius: 50%;
-          opacity: 0.35;
-        }
-
-        @media (max-width: 768px) {
-          .blob-mobile {
-            opacity: 0.2;
-          }
-        }
-      `}</style>
     </>
   );
 };

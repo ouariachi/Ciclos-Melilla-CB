@@ -16,7 +16,7 @@ export default function Hero() {
 
       <div className="absolute top-2 left-1/2 z-10 opacity-80 -translate-x-1/2">
         <Image
-          className="h-[100px] select-none"
+          className="h-[100px] w-auto select-none"
           width={600}
           height={159}
           src="https://res.cloudinary.com/doaywtxph/image/upload/v1753745297/CIclosMelillaCB/logo_full_transparent.webp"
@@ -56,7 +56,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             aria-label="Visitar Facebook"
           >
-            <Facebook className="h-6 w-6" />
+            <Facebook />
           </a>
 
           <a
@@ -65,7 +65,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             aria-label="Visitar Instagram"
           >
-            <Instagram className="h-6 w-6" />
+            <Instagram />
           </a>
         </div>
 
