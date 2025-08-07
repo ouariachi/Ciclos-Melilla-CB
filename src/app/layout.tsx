@@ -4,6 +4,7 @@ import CookiesBanner from "@/components/CookiesBanner";
 import Footer from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: {
@@ -42,11 +43,18 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ciclosmelilla.com"),
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const url = headersList.get("x-pathname") || "/";
+  const pathname = url.split("?")[0];
+  const hideFooterRoutes = ["/login", "/dash"];
+
+  const shouldShowFooter = !hideFooterRoutes.find((route) => pathname.startsWith(route));
+
   return (
     <html lang="es">
       <head>
@@ -57,7 +65,7 @@ export default function RootLayout({
         <SmoothScroll>
           {children}
         </SmoothScroll>
-        <Footer />
+        {shouldShowFooter && <Footer />}
         <SpeedInsights />
       </body>
     </html>

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useRef } from "react";
 import { contactForm } from "@/lib/contactForm";
 
 export default function ContactForm() {
   const [isChecked, setIsChecked] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const canSubmit = isChecked && !isSubmitting;
 
@@ -43,10 +44,11 @@ export default function ContactForm() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!canSubmit) return;
+    if (!formRef.current) return;
 
     setIsSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(formRef.current);
     const data = {
       name: formData.get("name")?.toString() || "",
       email: formData.get("email")?.toString() || "",
@@ -61,9 +63,9 @@ export default function ContactForm() {
       showToast("Error enviando el mensaje, intenta más tarde.", "error");
     }
 
-    e.currentTarget.reset();
     setIsChecked(false);
     setIsSubmitting(false);
+    formRef.current.reset();
   }
 
   return (
@@ -73,6 +75,7 @@ export default function ContactForm() {
       className="max-w-[95dvw] w-[570px] mx-auto mt-30"
       id="contact-form"
       onSubmit={handleSubmit}
+      ref={formRef}
     >
       <h2 className="text-3xl font-bold text-center mb-3">CONTÁCTANOS</h2>
 
