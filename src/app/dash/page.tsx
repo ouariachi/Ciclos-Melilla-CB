@@ -1,8 +1,11 @@
-export default function Dash() {
+"use server";
+
+import { MarqueeDash } from "@/components/dash/MarqueeDash";
+import { getCarousel } from "@/lib/getCarousel";
+
+export default async function Dash() {
+  const images = await getCarousel();
   return (
-    <div className="flex flex-col gap-10">
-      <h1 className="text-3xl font-bold text-center mb-3">DASH</h1>
-      <p className="text-lg text-center">Dashboard de tu ciclo</p>
-    </div>
+    <MarqueeDash images={images} />
   );
 }

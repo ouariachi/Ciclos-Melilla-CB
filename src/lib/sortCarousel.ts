@@ -22,7 +22,7 @@ export async function sortCarousel(fromIndex: number, toIndex: number) {
   });
 
   if (!fromResource || !toResource) {
-    throw new Error("No se pudo encontrar el recurso de la carrusel.");
+    throw new Error("No se pudo encontrar el recurso.");
   }
 
   const fromResourcePublicIdSplited = fromResource.public_id.split("_");
@@ -53,6 +53,7 @@ export async function sortCarousel(fromIndex: number, toIndex: number) {
       })
       .map((resource) => resource.secure_url);
   } catch (err) {
+    console.error(err);
     throw new Error(`Error renombrando a final: ${fromResource.public_id} → ${fromResourcePublicId}`);
   }
 }
