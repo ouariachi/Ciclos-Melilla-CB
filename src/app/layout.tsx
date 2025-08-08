@@ -60,7 +60,7 @@ export default async function RootLayout({
       <head>
         <link href="https://api.fontshare.com/v2/css?f[]=clash-display@1&display=swap" rel="stylesheet"></link>
       </head>
-      <body className="relative h-min bg-background text-foreground font-clash-display w-screen overflow-x-hidden min-h-[100dvh]">
+      <body className="relative h-min bg-background text-foreground font-clash-display w-screen overflow-x-hidden">
         <CookiesBanner />
         <SmoothScroll>
           {children}
