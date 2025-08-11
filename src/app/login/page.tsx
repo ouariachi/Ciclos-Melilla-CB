@@ -28,7 +28,7 @@ export default function LoginPage() {
   }, [error]);
 
   return (
-    <div>
+    <div className="min-h-[100dvh] relative">
       <div className="w-md max-w-[95dvw] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center flex flex-col items-center justify-center">
         <div>
           <Image
