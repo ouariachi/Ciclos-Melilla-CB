@@ -1,8 +1,10 @@
-import { isOpenNow, type OpenStatus } from '@/utils/schedule';
+"use server";
 
-export default function HeroOpen() {
-  const openStatus: OpenStatus = isOpenNow();
+import { getSchedule } from '@/lib/schedule';
+import { isOpenNow } from '@/utils/schedule';
 
+export default async function HeroOpen() {
+  const openStatus = isOpenNow(await getSchedule());
   return (
     <div>
       {openStatus.isOpen &&

@@ -1,42 +1,4 @@
-export interface TimeSlot {
-  start: string; // Format: "HH:mm"
-  end: string;   // Format: "HH:mm"
-}
-
-export interface Schedule {
-  [day: string]: TimeSlot[];
-}
-
-export interface OpenStatus {
-  day: string;
-  slots: TimeSlot[];
-  isOpen: boolean;
-}
-
-const schedule: Schedule = {
-  monday: [
-    { start: "10:00", end: "13:30" },
-    { start: "17:30", end: "20:30" }
-  ],
-  tuesday: [
-    { start: "10:00", end: "13:30" },
-    { start: "17:30", end: "20:30" }
-  ],
-  wednesday: [
-    { start: "10:00", end: "13:30" },
-    { start: "17:30", end: "20:30" }
-  ],
-  thursday: [
-    { start: "10:00", end: "13:30" },
-    { start: "17:30", end: "20:30" }
-  ],
-  friday: [
-    { start: "10:00", end: "13:30" },
-    { start: "17:30", end: "20:30" }
-  ],
-  saturday: [],
-  sunday: []
-};
+import { OpenStatus, Schedule, TimeSlot } from "@/lib/schedule";
 
 const dayTranslations: Record<string, string> = {
   sunday: "Domingo",
@@ -73,7 +35,7 @@ function getMadridDate(): Date {
   return new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
 }
 
-export function isOpenNow(): OpenStatus {
+export function isOpenNow(schedule: Schedule): OpenStatus {
   const daysOfWeek = [
     "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"
   ];
@@ -82,7 +44,7 @@ export function isOpenNow(): OpenStatus {
   const currentDay: string = daysOfWeek[now.getDay()];
   const currentTime: number = now.getHours() + now.getMinutes() / 60;
 
-  const todaySlots: TimeSlot[] = schedule[currentDay] || [];
+  const todaySlots: TimeSlot[] = schedule.days[currentDay] || [];
 
   const isOpen: boolean = todaySlots.some(({ start, end }) => {
     const [startHour, startMinute] = start.split(":").map(Number);
@@ -99,7 +61,12 @@ export function isOpenNow(): OpenStatus {
   };
 }
 
-export function getNextOpening(): { day: string; time: string } | null {
+export interface NextOpening {
+  day: string;
+  time: string;
+}
+
+export function getNextOpening(schedule: Schedule): NextOpening | null {
   const daysOfWeek = [
     "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"
   ];
@@ -111,7 +78,7 @@ export function getNextOpening(): { day: string; time: string } | null {
   for (let offset = 0; offset < 7; offset++) {
     const dayIndex = (nowDayIndex + offset) % 7;
     const engDay = daysOfWeek[dayIndex];
-    const slots = schedule[engDay] || [];
+    const slots = schedule.days[engDay] || [];
 
     for (const slot of slots) {
       const [startHour, startMinute] = slot.start.split(":").map(Number);

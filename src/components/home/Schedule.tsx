@@ -2,20 +2,17 @@
 
 import { useEffect } from "react";
 import { isOpenNow, getNextOpening } from "@/utils/schedule";
-import type { OpenStatus } from "@/utils/schedule";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { Schedule as ScheduleType } from "@/lib/schedule";
+import { groupDays } from "@/utils/groupDays";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface NextOpening {
-  day: string;
-  time: string;
-}
-
-export default function Schedule() {
-  const openStatus: OpenStatus = isOpenNow();
-  const nextOpening: NextOpening | null = !openStatus.isOpen ? getNextOpening() : null;
+export default function Schedule({ schedule }: { schedule: ScheduleType }) {
+  const openStatus = isOpenNow(schedule);
+  const nextOpening = !openStatus.isOpen ? getNextOpening(schedule) : null;
+  const groups = groupDays(schedule.days);
 
   useEffect(() => {
     const section = document.querySelector("#schedule");
@@ -58,17 +55,27 @@ export default function Schedule() {
           </p>
         )}
 
-        <div className="mb-4">
-          <p className="text-xl sm:text-2xl uppercase font-bold">Lunes - Viernes</p>
-          <p className="text-lg sm:text-xl font-medium">10:00 - 13:30</p>
-          <p className="text-lg sm:text-xl font-medium">17:30 - 20:30</p>
-        </div>
-
-        <div className="border-t border-white my-4" />
-
         <div>
-          <p className="text-xl sm:text-2xl uppercase font-bold">Sábados y Domingos</p>
-          <p className="text-lg sm:text-xl font-medium">Cerrado</p>
+          {groups.map((group, idx) => (
+            <div key={idx}>
+              <div className="mb-4">
+                <p className="text-xl sm:text-2xl uppercase font-bold">{group.label}</p>
+                {group.times.length > 0 ? (
+                  group.times.map((t, i) => (
+                    <p
+                      key={i}
+                      className="text-lg sm:text-xl font-medium"
+                    >{`${t.start} - ${t.end}`}</p>
+                  ))
+                ) : (
+                  <p className="text-lg sm:text-xl font-medium">Cerrado</p>
+                )}
+              </div>
+              {idx !== groups.length - 1 && (
+                <div className="border-t border-white my-4" />
+              )}
+            </div>
+          ))}
         </div>
 
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full" />

@@ -57,18 +57,18 @@ export default function DashLayout({ children }: { children: React.ReactNode }) 
 
           <nav className="mt-6">
             <ul className="flex flex-col gap-4 px-6 items-center">
-              <li>
-                <a href="/dash/#carrusel" className="text-medium text-lg hover:text-gray-300">
+              {/* <li>
+                <a href="/dash/" className="text-medium text-lg hover:text-gray-300">
                   Carrusel
                 </a>
-              </li>
+              </li> */}
               {/* <li><a href="/dash/eventos" className="text-medium text-lg hover:text-gray-300">Eventos</a></li> */}
-              {/* <li><a href="/dash/#galeria" className="text-medium text-lg hover:text-gray-300">Galería</a></li> */}
-              <li>
-                <a href="/dash/#horario" className="text-medium text-lg hover:text-gray-300">
+              {/* <li><a href="/dash/galeria" className="text-medium text-lg hover:text-gray-300">Galería</a></li> */}
+              {/* <li>
+                <a href="/dash/horario" className="text-medium text-lg hover:text-gray-300">
                   Horario
                 </a>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </aside>

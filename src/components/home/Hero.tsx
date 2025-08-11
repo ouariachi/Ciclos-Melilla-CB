@@ -1,3 +1,5 @@
+"use server";
+
 import WhatsApp from "@/components/icons/WhatsApp";
 import Facebook from "@/components/icons/Facebook";
 import HeroCarousel from "@/components/home/HeroCarousel";
@@ -7,7 +9,7 @@ import HeroOpen from "@/components/home/HeroOpen";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Hero() {
+export default async function Hero() {
   return (
     <section id="hero" className="h-screen relative">
       <div className="fixed top-4 right-5 z-20 transition-all">
