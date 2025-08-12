@@ -16,9 +16,9 @@ export default async function Hero() {
         <MainMenu />
       </div>
 
-      <div className="absolute top-2 left-1/2 z-10 opacity-80 -translate-x-1/2">
+      <div className="absolute top-4 left-1/2 z-10 opacity-80 -translate-x-1/2 sm:top-2">
         <Image
-          className="h-[100px] w-auto select-none"
+          className="w-[377px] h-auto max-w-[90dvw] select-none"
           width={600}
           height={159}
           src="https://res.cloudinary.com/doaywtxph/image/upload/v1753745297/CIclosMelillaCB/logo_full_transparent.webp"
