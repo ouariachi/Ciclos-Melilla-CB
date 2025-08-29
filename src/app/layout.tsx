@@ -59,6 +59,7 @@ export default async function RootLayout({
     <html lang="es">
       <head>
         <link href="https://api.fontshare.com/v2/css?f[]=clash-display@1&display=swap" rel="stylesheet"></link>
+        <script defer src="https://analytics.ouariachi.com/script.js" data-website-id="39a2da0a-00f6-49a3-a924-806fde470c80"></script>
       </head>
       <body className="relative h-min bg-background text-foreground font-clash-display w-screen overflow-x-hidden">
         <CookiesBanner />
